@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
+const pokemon = require('pokemon')
 
 var db = mongoose.connection;
 
@@ -14,7 +15,6 @@ db.once('open', function() {
 var listSchema = mongoose.Schema({
   id: {type: Number, unique: true},
   name: String,
-  stat: String,
   url: String,
   like: Boolean
 

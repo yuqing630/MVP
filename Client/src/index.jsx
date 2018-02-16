@@ -10,6 +10,23 @@ class App extends React.Component {
       list: []
     }
   }
+  load(){
+    axios.post('/', {
+
+    })
+    .then(() => {
+      return axios.get('/')
+    })
+    .then((response) => {
+      this.setState({
+        list: response.data
+      })
+    })
+    .catch(response => {
+
+      console.log(response)
+    })
+  }
 
 
 
@@ -17,6 +34,7 @@ class App extends React.Component {
       return (<div>
         <h1>Pokemon List</h1>
         <List items={this.state.list}/>
+
       </div>)
     }
   }
