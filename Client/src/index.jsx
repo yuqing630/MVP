@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Search from './components/ListItem.jsx'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +12,9 @@ class App extends React.Component {
       list: []
     }
   }
-  load(){
+  load(input){
     axios.post('/', {
-
+      name: `${input}`
     })
     .then(() => {
       return axios.get('/')
@@ -33,7 +35,8 @@ class App extends React.Component {
   render () {
       return (<div>
         <h1>Pokemon List</h1>
-        <List items={this.state.list}/>
+        <List list={this.state.list}/>
+        <Search onSearch={this.load.bind(this)}/>
 
       </div>)
     }

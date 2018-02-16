@@ -29,10 +29,10 @@ exports.save = (lists) => {
 }
 
 
-var selectAll = () => {
+exports.selectAll = () => {
   return List.find({like : true})
   .sort('id')
   .exec()
 };
 
-module.exports.selectAll = selectAll;
+// module.exports.selectAll = selectAll;

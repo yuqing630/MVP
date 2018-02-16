@@ -4,15 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "xo && ava",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
   },
-  "author": "lotsofsleep",
+  "author": "...",
   "license": "N/A",
   "devDependencies": {
-    "ava": "*",
-    "xo": "*",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
@@ -20,8 +17,6 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "pokemon": "^1.2.2",
-    "unique-random-array": "^1.0.0",
     "angular": "^1.6.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
@@ -30,28 +25,5 @@
     "mysql": "^2.13.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
-  },
-  "engines": {
-    "node": ">=4"
-  },
-  "files": [
-    "index.js",
-    "data"
-  ],
-  "keywords": [
-    "pokemon",
-    "names",
-    "creatures",
-    "words",
-    "list",
-    "array",
-    "random",
-    "mock",
-    "placeholder",
-    "fixture",
-    "data"
-  ],
-  "xo": {
-    "esnext": true
   }
 }
