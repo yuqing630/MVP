@@ -24,7 +24,7 @@ var listSchema = mongoose.Schema({
 
 var List = mongoose.model('List', listSchema);
 
-export.save = (lists) => {
+exports.save = (lists) => {
   return list.create(lists)
 }
 
