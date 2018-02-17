@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-const pokemon = require('pokemon')
+// mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://eugene630:Yaoping01@ds151070.mlab.com:51070/mongod');
+
+// const pokemon = require('pokemon')
 
 var db = mongoose.connection;
 
@@ -13,7 +15,7 @@ db.once('open', function() {
 });
 
 var listSchema = mongoose.Schema({
-  id: {type: Number, unique: true},
+  id: {type: Number},
   name: String,
   img: String,
   like: Boolean
@@ -29,17 +31,24 @@ exports.save = (result) => {
   var newItem = new List({
     id : result.id,
     name : result.name,
-    img : result.img
+    img : result.img,
+    like: false
   })
 // console.log(newItem)
+  newItem.save(function(err){
+    if (err) console.log(err)
+  })
 }
 
 
+
 exports.selectAll = () => {
-  return List.find({})
+  return List.find({like:false})
   .sort('id')
+  .limit(9)
   .exec()
 };
 
 
 // module.exports.selectAll = selectAll;
+// module.exports = mongoose.model('pokemon', listSchema)s

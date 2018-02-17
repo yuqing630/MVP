@@ -11,19 +11,24 @@ class App extends React.Component {
     this.state = {
       list: []
     }
+    // console.log('in here')
   }
+
+
   load(input){
     axios.post('/', {
       name: `${input}`
     })
     .then(() => {
-      console.log('catss')
-      return axios.get('/')
-    })
-    .then((response) => {
-      // console.log(cats)
-      this.setState({
-        list: response.data
+      // console.log('axios.get')
+      axios.get('/data')
+      .then((response)=>{
+        // console.log(response.data)
+        this.setState({
+          list: response.data
+        })
+      }).catch(response=>{
+        console.log(response)
       })
     })
     .catch(response => {
@@ -32,14 +37,33 @@ class App extends React.Component {
     })
   }
 
+  // load(){
+  //   $.ajax({
+  //     url:'/',
+  //     type:'GET',
+  //     headers:["Content-Type":"application/json"],
+  //     success:(data)=>{
+  //       console.log(data)
+  //       this.setState({
+  //         list: data
+  //       })
+  //     },
+  //     error:(err)=>{
+  //       console.log('err',err)
+  //     }
+  //   })
+  // }
 
+ // favorite()
 
   render () {
+      console.log(this.state.list)
       return (<div>
         <h1>Pokemon List</h1>
-        <List list={this.state.list}/>
-        <Search onSearch={this.load.bind(this)}/>
 
+        <Search onSearch={this.load.bind(this)}/>
+        <List items={this.state.list} onClick={this.favorite}/>
+        <button onClick={this.filter}>Favorite</button>
       </div>)
     }
   }
