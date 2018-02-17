@@ -17,9 +17,11 @@ class App extends React.Component {
       name: `${input}`
     })
     .then(() => {
+      console.log('catss')
       return axios.get('/')
     })
     .then((response) => {
+      // console.log(cats)
       this.setState({
         list: response.data
       })

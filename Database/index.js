@@ -15,7 +15,7 @@ db.once('open', function() {
 var listSchema = mongoose.Schema({
   id: {type: Number, unique: true},
   name: String,
-  url: String,
+  img: String,
   like: Boolean
 
 
@@ -24,15 +24,22 @@ var listSchema = mongoose.Schema({
 
 var List = mongoose.model('List', listSchema);
 
-exports.save = (lists) => {
-  return list.create(lists)
+exports.save = (result) => {
+  // console.log(result)
+  var newItem = new List({
+    id : result.id,
+    name : result.name,
+    img : result.img
+  })
+// console.log(newItem)
 }
 
 
 exports.selectAll = () => {
-  return List.find({like : true})
+  return List.find({})
   .sort('id')
   .exec()
 };
+
 
 // module.exports.selectAll = selectAll;
