@@ -8,8 +8,8 @@ const List = (props) => (
         return (
 
           <div>
-
-          <img src={item.img}/>
+          {item.id}
+          <img src={item.img} onClick={() => props.handleClick(item.name)}/>
           {item.name}
          </div>
        )

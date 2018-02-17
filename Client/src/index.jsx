@@ -4,6 +4,7 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import Search from './components/ListItem.jsx'
 import axios from 'axios'
+import Favorite from './components/favorites.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends React.Component {
     this.state = {
       list: []
     }
-    // console.log('in here')
+    this.filter = this.filter.bind(this)
   }
 
 
@@ -20,10 +21,8 @@ class App extends React.Component {
       name: `${input}`
     })
     .then(() => {
-      // console.log('axios.get')
       axios.get('/data')
       .then((response)=>{
-        // console.log(response.data)
         this.setState({
           list: response.data
         })
@@ -32,37 +31,50 @@ class App extends React.Component {
       })
     })
     .catch(response => {
-
       console.log(response)
     })
   }
 
-  // load(){
-  //   $.ajax({
-  //     url:'/',
-  //     type:'GET',
-  //     headers:["Content-Type":"application/json"],
-  //     success:(data)=>{
-  //       console.log(data)
-  //       this.setState({
-  //         list: data
-  //       })
-  //     },
-  //     error:(err)=>{
-  //       console.log('err',err)
-  //     }
-  //   })
-  // }
+  favorite(pokemon){
 
- // favorite()
+  var newList = this.state.list.map(function(name, i){
+    if(name.name === pokemon){
+      console.log(name.name)
+      return name.like= true
+    }
+  })
+  this.setState({
+    list:newList
+  })
+  axios.post('/add', {
+    name: `${pokemon}`
+  })
+  .then((response)=>{
+    console.log(response)
+  }).catch(response=>{
+    console.log(response)
+  })
+ }
+ filter(){
+   axios.get('/fave')
+   .then((response)=>{
+    //  console.log(this)
+     this.setState({
+       list: response.data
+     })
+   }).catch(response => {
+     console.log(response)
+   })
+ }
+
 
   render () {
-      console.log(this.state.list)
+      // console.log(this.state.list)
       return (<div>
         <h1>Pokemon List</h1>
 
         <Search onSearch={this.load.bind(this)}/>
-        <List items={this.state.list} onClick={this.favorite}/>
+        <List items={this.state.list} handleClick={this.favorite.bind(this)}/>
         <button onClick={this.filter}>Favorite</button>
       </div>)
     }

@@ -19,11 +19,14 @@ class Search extends React.Component {
 
   search() {
     this.props.onSearch(this.state.input);
+    this.setState({
+      input:''
+    })
   }
 
   render() {
     return (<div>
-      Enter a Pokemon Name: <input value={this.state.input} onChange={this.onChange}/>
+      Enter a Pokemon Name or Id: <input value={this.state.input} onChange={this.onChange}/>
       <button onClick={this.search}> Search </button>
     </div>)
   }

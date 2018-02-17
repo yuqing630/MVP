@@ -19,36 +19,41 @@ var listSchema = mongoose.Schema({
   name: String,
   img: String,
   like: Boolean
-
-
-
 });
 
 var List = mongoose.model('List', listSchema);
 
 exports.save = (result) => {
-  // console.log(result)
   var newItem = new List({
     id : result.id,
     name : result.name,
     img : result.img,
     like: false
   })
-// console.log(newItem)
+  newItem.save(function(err){
+    if (err) console.log(err)
+  })
+}
+exports.saves = (result) => {
+  var newItem = new List({
+    id : result.id,
+    name : result.name,
+    img : result.img,
+    like: true
+  })
   newItem.save(function(err){
     if (err) console.log(err)
   })
 }
 
 
-
 exports.selectAll = () => {
-  return List.find({like:false})
-  .sort('id')
-  .limit(9)
+  return List.aggregate({ $sample:{size: 6}})
   .exec()
 };
 
-
-// module.exports.selectAll = selectAll;
-// module.exports = mongoose.model('pokemon', listSchema)s
+exports.faves = () => {
+  return List.find({like:true})
+  .sort('id')
+  .exec()
+}
