@@ -48,7 +48,7 @@ exports.saves = (result) => {
 
 
 exports.selectAll = () => {
-  return List.aggregate({ $sample:{size: 6}})
+  return List.aggregate({ $sample:{size: 20}})
   .exec()
 };
 

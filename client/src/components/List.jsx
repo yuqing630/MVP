@@ -7,11 +7,11 @@ const List = (props) => (
       {props.items.map((item) => {
         return (
 
-          <div>
-          {item.id}
-          <img src={item.img} onClick={() => props.handleClick(item.name)}/>
+          <text>
           {item.name}
-         </div>
+          <img src={item.img} onClick={() => props.handleClick(item.name)}/>
+
+         </text>
        )
      })
     }
